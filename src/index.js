@@ -24,6 +24,14 @@ function SignUpForm({ isVisible, onSignUp }) {
 
 function App() {
   const [isSignUpVisible, setSignUpVisible] = useState(false);
+  const timeoutId = useRef();
+
+  useEffect(() => {
+    timeoutId.current = setTimeout(() => setSignUpVisible(true), 3000);
+    return () => {
+      clearTimeout(timeoutId.current);
+    };
+  }, []);
   return (
     <div className="App">
       <SignUpForm
@@ -31,6 +39,7 @@ function App() {
         onSignUp={(event) => {
           event.preventDefault();
           setSignUpVisible((prev) => !prev);
+          clearTimeout(timeoutId.current);
         }}
       />
       <button onClick={() => setSignUpVisible((prev) => !prev)}>
