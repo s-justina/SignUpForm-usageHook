@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 import "./styles.css";
 
+function SignUpForm({ isVisible }) {
+  return (
+    <form style={{ display: isVisible ? "block" : "none" }}>
+      <label>
+        E-mail
+        <input />
+      </label>
+      <br />
+      <button>Sign Up</button>
+    </form>
+  );
+}
+
 function App() {
+  const [isSignUpVisible, setSignUpVisible] = useState(false);
   return (
     <div className="App">
-      <h1>Hi</h1>
-      <h2>Start by adding the SignUpForm!</h2>
+      <SignUpForm isVisible={isSignUpVisible} />
+      <button onClick={() => setSignUpVisible((prev) => !prev)}>
+        Sign up to show form
+      </button>
     </div>
   );
 }
